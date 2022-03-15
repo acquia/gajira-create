@@ -4,6 +4,10 @@ Create new issue
 For examples on how to use this, check out the [gajira-demo](https://github.com/atlassian/gajira-demo) repository
 > ##### Only supports Jira Cloud. Does not support Jira Server (hosted)
 
+## Server branch
+
+This branch has been forked from the official Atlassian repository to support Jira server (on-premise) installs.
+
 ## Usage
 
 > ##### Note: this action requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
