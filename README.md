@@ -1,3 +1,8 @@
+# Fork details
+This project has been forked from the official Atlassian repository to support two use cases:
+- The `bearer` branch supports personal access tokens
+- The `server` branch supports Jira server (on-premise) installs
+
 # Jira Create
 Create new issue
 
