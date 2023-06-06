@@ -9,7 +9,7 @@ const config = {
 }
 
 const projectKey = 'TESTPROJECT'
-const issuetypeName = 'TESTISSUETYPE'
+const issuetypeName = 'Incident'
 
 const { mocks } = require('./helpers')
 
@@ -25,14 +25,13 @@ test(`Should create issue with customfield`, async () => {
     config,
   })
 
-  const createMetaRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta')
-    .query({
-      expand: 'projects.issuetypes.fields',
-      projectKeys: 'TESTPROJECT',
-      issuetypeNames: 'TESTISSUETYPE',
-    })
-    .reply(200, mocks.jira.responses.createMeta)
+  const createMetaIssueTypesRequest = nock(baseUrl)
+    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes')
+    .reply(200, mocks.jira.responses.createMetaIssueTypes)
+
+  const createMetaFieldsRequest = nock(baseUrl)
+    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes/10002')
+    .reply(200, mocks.jira.responses.createMetaFields)
 
   let createIssueRequestBody = {}
   const createIssueRequest = nock(baseUrl)
@@ -45,7 +44,8 @@ test(`Should create issue with customfield`, async () => {
       }
     })
 
-  await createMetaRequest
+  await createMetaIssueTypesRequest
+  await createMetaFieldsRequest
   await createIssueRequest
 
   const result = await action.execute()
@@ -80,14 +80,13 @@ test(`Should create simple issue without customfield`, async () => {
     config,
   })
 
-  const createMetaRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta')
-    .query({
-      expand: 'projects.issuetypes.fields',
-      projectKeys: 'TESTPROJECT',
-      issuetypeNames: 'TESTISSUETYPE',
-    })
-    .reply(200, mocks.jira.responses.createMeta)
+  const createMetaIssueTypesRequest = nock(baseUrl)
+    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes')
+    .reply(200, mocks.jira.responses.createMetaIssueTypes)
+
+  const createMetaFieldsRequest = nock(baseUrl)
+    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes/10002')
+    .reply(200, mocks.jira.responses.createMetaFields)
 
   let createIssueRequestBody = {}
   const createIssueRequest = nock(baseUrl)
@@ -100,7 +99,8 @@ test(`Should create simple issue without customfield`, async () => {
       }
     })
 
-  await createMetaRequest
+  await createMetaIssueTypesRequest
+  await createMetaFieldsRequest
   await createIssueRequest
 
   const result = await action.execute()
