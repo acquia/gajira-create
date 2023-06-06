@@ -1,0 +1,13 @@
+{
+    "values": [
+        {
+            "self": "https://example.com/rest/api/2/issuetype/10002",
+            "id": "10002",
+            "description": "An event that causes disruption to or a reduction in the quality of a service which requires an emergency response",
+            "iconUrl": "https://example.com/secure/viewavatar?size=xsmall&avatarId=10308&avatarType=issuetype",
+            "name": "Incident",
+            "subtask": false,
+            "avatarId": 10308
+        }
+    ]
+}

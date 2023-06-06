@@ -10,8 +10,14 @@ class Jira {
     this.token = token
   }
 
-  async getCreateMeta (query) {
-    return this.fetch('getCreateMeta', { pathname: '/rest/api/2/issue/createmeta', query })
+  async getIssueTypes (projectKey) {
+    return this.fetch('getCreateIssueMetaProjectIssueTypes',
+      { pathname: `/rest/api/2/issue/createmeta/${projectKey}/issuetypes`})
+  }
+
+  async getFields (projectKey, issueTypeId) {
+    return this.fetch('getCreateIssueMetaFields',
+      { pathname: `/rest/api/2/issue/createmeta/${projectKey}/issuetypes/${issueTypeId}`})
   }
 
   async createIssue (body) {

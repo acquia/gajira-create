@@ -18,25 +18,11 @@ module.exports = class {
     const issuetypeName = argv.issuetype
 
     // map custom fields
-    const { projects } = await this.Jira.getCreateMeta({
-      expand: 'projects.issuetypes.fields',
-      projectKeys: projectKey,
-      issuetypeNames: issuetypeName,
-    })
-
-    if (projects.length === 0) {
-      console.error(`project '${projectKey}' not found`)
-
-      return
-    }
-
-    const [project] = projects
-
-    if (project.issuetypes.length === 0) {
-      console.error(`issuetype '${issuetypeName}' not found`)
-
-      return
-    }
+    const issueTypes = await this.Jira.getIssueTypes(projectKey)
+    const issueType = issueTypes.values.find(element => element.name === issuetypeName);
+    const issueTypeId = issueType.id
+    // I'm really confused, it seems like these API calls are completely unnecessary.
+    const projects = await this.Jira.getFields(projectKey, issueTypeId)
 
     let providedFields = [{
       key: 'project',
