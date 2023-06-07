@@ -25,14 +25,6 @@ test(`Should create issue with customfield`, async () => {
     config,
   })
 
-  const createMetaIssueTypesRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes')
-    .reply(200, mocks.jira.responses.createMetaIssueTypes)
-
-  const createMetaFieldsRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes/10002')
-    .reply(200, mocks.jira.responses.createMetaFields)
-
   let createIssueRequestBody = {}
   const createIssueRequest = nock(baseUrl)
     .post('/rest/api/2/issue')
@@ -44,8 +36,6 @@ test(`Should create issue with customfield`, async () => {
       }
     })
 
-  await createMetaIssueTypesRequest
-  await createMetaFieldsRequest
   await createIssueRequest
 
   const result = await action.execute()
@@ -80,14 +70,6 @@ test(`Should create simple issue without customfield`, async () => {
     config,
   })
 
-  const createMetaIssueTypesRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes')
-    .reply(200, mocks.jira.responses.createMetaIssueTypes)
-
-  const createMetaFieldsRequest = nock(baseUrl)
-    .get('/rest/api/2/issue/createmeta/TESTPROJECT/issuetypes/10002')
-    .reply(200, mocks.jira.responses.createMetaFields)
-
   let createIssueRequestBody = {}
   const createIssueRequest = nock(baseUrl)
     .post('/rest/api/2/issue')
@@ -99,8 +81,6 @@ test(`Should create simple issue without customfield`, async () => {
       }
     })
 
-  await createMetaIssueTypesRequest
-  await createMetaFieldsRequest
   await createIssueRequest
 
   const result = await action.execute()
